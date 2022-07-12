@@ -6,7 +6,7 @@ const Search = () => {
   return (
     <>
     <h1> Tech News Website</h1>
-    <form>
+    <form onSubmit={(e)=>e.preventDefault()}>
     <div>
       <input type="text" placeholder='Search Here' 
       value={query} 
