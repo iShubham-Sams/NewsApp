@@ -40,13 +40,20 @@ const AppProvider=({children})=>{
             type:"REMOVE_POST",payload: post_ID
         })
      }
-    
+    // to search post
+
+     const searchPost=(searchQuery)=>{
+        dispatch({type:"SEARCH_QUERY",
+                payload:searchQuery,
+    })
+     }
+
     useEffect(()=>{
         fetchApiData(`${API}query=${state.query}&page=${state.page}`)
-    },[])
+    },[state.query])
     
 
-  return ( <AppContext.Provider value={{...state,removePost}}>
+  return ( <AppContext.Provider value={{...state,removePost,searchPost}}>
         {children}
     </AppContext.Provider>)
 }
