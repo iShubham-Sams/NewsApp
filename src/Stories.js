@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from './Context'
 
 const Stories = () => {
-    const {hits,isLoding}=useGlobalContext()
+    const {hits,isLoding,removePost}=useGlobalContext()
     if(isLoding){
         return(
             <>
@@ -12,11 +12,28 @@ const Stories = () => {
     }
     
   return (<>
-   <h1>data</h1>
+   <div className="stories-div" >
     {hits.map((curPost)=>{
-        return <h2>{curPost.title}</h2>
+        const {title,author,objectID,url,num_comments}=curPost;
+        return (
+            <>
+            <div className="card" key={objectID}>
+                <h2>{title}</h2>
+                <p>
+                    By <span>{author}</span> | <span> {num_comments} </span> Comments
+                </p>
+                <div className="card-button">
+                    <a href={url} target="_blank">
+                        Read More
+                    </a>
+                    <a href="#" onClick={()=>removePost(objectID)}> Remove</a>
+                </div>
+            </div>
+            </>
+        )
+        
     })}
-    
+    </div>
   </>
   )
 }
